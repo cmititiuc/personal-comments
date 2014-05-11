@@ -8,6 +8,8 @@
 <div style="text-align: right; display: inline-block;">
   <%= form_for [@event, Comment.new] do |f| %>
     <%= f.text_area :comment, :style=>'width: 500px;' %><br />
+    <%= f.hidden_field :commentable_id, :value=>@event.id %>
+    <%= f.hidden_field :commentable_type, :value=>@event.class.name %>
     <%= f.submit %>
   <% end %>
 </div>
