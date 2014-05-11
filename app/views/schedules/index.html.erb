@@ -1,25 +1,85 @@
+<style>
+  td { border: 0 dashed red; vertical-align: top; }
+  ul { padding: 1em 1em 1em 1em; margin: 0; list-style-type:none; }
+  li { line-height: 2em; font-size: medium; }
+  h2 { display: inline-block; margin-right: 1em; }
+  th { padding: .5em }
+</style>
 <div><%= link_to 'Meal Plan', meals_path %></div>
 <h1>Listing schedules</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @schedules.each do |schedule| %>
 
+  <h2><%= schedule.name %></h2>
+  <%= link_to 'Show', schedule %>
+  <%= link_to 'Edit', edit_schedule_path(schedule) %>
+  <%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %>
+<table style="margin-left: auto; margin-right: auto;">
+  <thead>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </thead>
   <tbody>
-    <% @schedules.each do |schedule| %>
-      <tr>
-        <td><%= schedule.name %></td>
-        <td><%= link_to 'Show', schedule %></td>
-        <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-        <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <tr>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "mon"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "tue"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "wed"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "thu"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "fri"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "sat"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% schedule.scheduled_events.where('day = "sun"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 
