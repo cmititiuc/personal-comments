@@ -1,0 +1,77 @@
+<style>
+  td { border: 0 dashed red; vertical-align: top; }
+  ul { padding: 0 1em 0 2em; margin: 0; }
+</style>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @schedule.name %>
+</p>
+<table>
+  <thead>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th>Sun</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "mon"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "tue"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "wed"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "thu"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "fri"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "sat"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% @schedule.scheduled_events.where('day = "sun"').each do |event| %>
+            <li><%= event.event.name %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>
