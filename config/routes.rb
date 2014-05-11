@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :scheduled_events
 
-  resources :events
+  resources :events do
+    resources :comments
+  end
 
   resources :schedules
 

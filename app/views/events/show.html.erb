@@ -1,9 +1,25 @@
+<style>
+  td { padding: .5em; }
+</style>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<h1><%= @event.name %></h1>
+
+<div style="text-align: right; display: inline-block;">
+  <%= form_for [@event, Comment.new] do |f| %>
+    <%= f.text_area :comment, :style=>'width: 500px;' %><br />
+    <%= f.submit %>
+  <% end %>
+</div>
+
+<table style="max-width: 500px">
+  <% @event.comments.all.each do |comment| %>
+    <tr>
+      <td style="white-space: nowrap; vertical-align: top; font-size: medium;"><%= comment.created_at %></td>
+      <td><%= comment.comment %></td>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', schedules_path %>

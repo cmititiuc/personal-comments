@@ -29,49 +29,49 @@
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "mon"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "tue"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "wed"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "thu"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "fri"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "sat"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
       <td>
         <ul>
           <% schedule.scheduled_events.where('day = "sun"').each do |event| %>
-            <li><%= event.event.name %></li>
+            <li><%= link_to event.event.name, event.event %></li>
           <% end %>
         </ul>
       </td>
