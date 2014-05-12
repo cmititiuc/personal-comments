@@ -1,7 +1,21 @@
 class CommentsController < ApplicationController
+  def index
+    @comments = Comment.all
+    @comments = @comments.where('commentable_id = ?', params[:filter]) if params[:filter]
+  end
+
+  def new
+    @comment = Comment.new
+  end
+
   def create
-    @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id])
-    @comment = @commentable.comments.new(comment_params)
+    @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id]) rescue nil
+    if @commentable
+      @comment = @commentable.comments.new(comment_params)
+    else
+      @commentable = comments_path
+      @comment = Comment.new(comment_params)
+    end
     if @comment.save
       redirect_to @commentable, notice: "Comment created."
     else

@@ -1,0 +1,31 @@
+<style>
+  td { padding: 1em; vertical-align: top; }
+  td a { font-size: medium }
+  .comment { line-height: 1.5em; }
+</style>
+<%= link_to 'Schedules', schedules_path %> | <%= link_to 'Meal Plan', meals_path %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing comments</h1>
+
+<%= link_to 'clear filter', comments_path if params[:filter] %>
+<% Event.all.each do |event| %>
+  <%= link_to event.name, comments_path(:filter=>event.id) %>
+<% end %>
+
+<table>
+  <% @comments.each do |comment| %>
+    <% commentable = comment.commentable_type.constantize.find(comment.commentable_id) rescue nil %>
+    <tr>
+      <td style="white-space: nowrap; font-size: medium;"><%= comment.created_at %></td>
+      <td><%= link_to commentable.name, commentable if commentable %></td>
+      <td class="comment"><%= comment.comment.html_safe %></td>
+      <td style="white-space: nowrap;">Show Edit Destroy</td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>
