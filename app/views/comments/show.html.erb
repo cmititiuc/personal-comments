@@ -1,0 +1,15 @@
+<style>
+  td { padding: .5em; }
+</style>
+<p id="notice"><%= notice %></p>
+
+<h1>Viewing comment</h1>
+
+<p>Created: <%= @comment.created_at %></p>
+<p>Updated: <%= @comment.updated_at %></p>
+<p><%= @comment.comment %></p>
+
+<br />
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

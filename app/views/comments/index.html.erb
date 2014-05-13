@@ -18,13 +18,26 @@
   <% @comments.each do |comment| %>
     <% commentable = comment.commentable_type.constantize.find(comment.commentable_id) rescue nil %>
     <tr>
-      <td style="white-space: nowrap; font-size: medium;"><%= comment.created_at %></td>
+      <td style="white-space: nowrap; font-size: medium;">
+        <span style="font-size: medium;">
+          <%= comment.created_at.strftime('%a, %b %d, %Y') %>
+          <br/>
+          <%= comment.created_at.strftime('%-I:%M %p') %>
+        </span>
+      </td>
       <td><%= link_to commentable.name, commentable if commentable %></td>
       <td class="comment"><%= comment.comment.html_safe %></td>
-      <td style="white-space: nowrap;">Show Edit Destroy</td>
+      <td style="white-space: nowrap;">
+        <%= link_to 'Show', comment %> |
+        <%= link_to 'Edit', edit_comment_path(comment) %> |
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
     </tr>
   <% end %>
 </table>
+<% if @comments.blank? %>
+  <div style="text-align: center; padding: 1em; line-height: 1.5em; font-size: medium;">No comments.</div>
+<% end %>
 
 <br>
 
