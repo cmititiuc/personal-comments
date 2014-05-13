@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<%= link_to_if controller_name != 'comments', 'Comments', comments_path %> |
+<%= link_to_if controller_name != 'schedules',  'Schedules', schedules_path %> |
+<%= link_to_if controller_name != 'meals',  'Meals', meals_path %> |
+<%= link_to_if controller_name != 'events',  'Events', events_path %> |
+<%= link_to_if controller_name != 'scheduled_events',  'Scheduled Events', scheduled_events_path %>
+
 <%= yield %>
 
 </body>

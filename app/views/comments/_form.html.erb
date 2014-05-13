@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :event %><br>
+    <%= f.select :commentable_id, [['-- None --', '']] + Event.all.map{ |e| [e.name, e.id] } %>
+    <%= f.hidden_field :commentable_type, :value=>'Event' %>
+  </div>
+  <div class="field">
     <%= f.label :comment %><br>
     <%= f.text_area :comment, :style=>'width: 500px; height: 100px;' %>
   </div>

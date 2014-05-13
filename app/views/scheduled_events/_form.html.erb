@@ -13,7 +13,15 @@
 
   <div class="field">
     <%= f.label :day %><br>
-    <%= f.text_field :day %>
+    <%= f.select :day, [['Mon', 'mon'], ['Tue', 'tue'], ['Wed', 'wed'], ['Thu', 'thu'], ['Fri', 'fri'], ['Sat', 'sat'], ['Sun', 'sun']] %><br>
+  </div>
+  <div class="field">
+    <%= f.label :schedule %><br>
+    <%= f.select :schedule_id, Schedule.all.map{ |s| [s.name, s.id] } %>
+  </div>
+  <div class="field">
+    <%= f.label :event %><br>
+    <%= f.select :event_id, Event.all.map{ |e| [e.name, e.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

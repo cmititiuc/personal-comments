@@ -69,6 +69,6 @@ class ScheduledEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scheduled_event_params
-      params.require(:scheduled_event).permit(:day)
+      params.require(:scheduled_event).permit(:day, :schedule_id, :event_id)
     end
 end
