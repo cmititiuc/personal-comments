@@ -1,1 +1,1 @@
-*Really simple* weekly schedule and meal plan app
+*Really simple* weekly schedule and meal plan app.
