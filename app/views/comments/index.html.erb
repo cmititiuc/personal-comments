@@ -10,7 +10,7 @@
 
 <h1>Listing comments</h1>
 
-<div style="text-align: right; width: 500px; margin-left: auto; margin-right: auto;">
+<div style="text-align: right; width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2em;">
   <%= form_for Comment.new do |f| %>
     <%= f.select :commentable_id, [['-- None --', '']] + Event.all.map{ |e| [e.name, e.id] }, {}, { :style=>'float: left;' } %>
     <%= f.hidden_field :commentable_type, :value=>'Event' %>
