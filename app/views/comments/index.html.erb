@@ -10,6 +10,16 @@
 
 <h1>Listing comments</h1>
 
+<div style="text-align: right; width: 500px; margin-left: auto; margin-right: auto;">
+  <%= form_for Comment.new do |f| %>
+    <%= f.select :commentable_id, [['-- None --', '']] + Event.all.map{ |e| [e.name, e.id] }, {}, { :style=>'float: left;' } %>
+    <%= f.hidden_field :commentable_type, :value=>'Event' %>
+    <%= hidden_field_tag :return, comments_path %>
+    <%= f.text_area :comment, :style=>'width: 100%' %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
 <div style="text-align: center;">
   <%= link_to 'clear filter', comments_path if params[:filter] %>
   <% Event.all.each do |event| %>

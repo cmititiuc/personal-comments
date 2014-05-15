@@ -1,24 +1,38 @@
 <style>
-  td { padding: .5em; }
+  td { padding: .5em; vertical-align: top; }
 </style>
 <p id="notice"><%= notice %></p>
 
 <h1><%= @event.name %></h1>
 
-<div style="text-align: right; display: inline-block;">
+<div style="text-align: right; width: 500px; margin-left: auto; margin-right: auto;">
   <%= form_for [@event, Comment.new] do |f| %>
-    <%= f.text_area :comment, :style=>'width: 500px;' %><br />
+    <%= f.text_area :comment, :style=>'width: 100%' %>
     <%= f.hidden_field :commentable_id, :value=>@event.id %>
     <%= f.hidden_field :commentable_type, :value=>@event.class.name %>
     <%= f.submit %>
   <% end %>
 </div>
 
-<table style="max-width: 500px">
+<table>
   <% @event.comments.all.each do |comment| %>
     <tr>
-      <td style="white-space: nowrap; vertical-align: top; font-size: medium;"><%= comment.created_at %></td>
-      <td><%= comment.comment %></td>
+      <% day = nil %>
+      <td style="white-space: nowrap; font-size: medium;">
+        <% unless day == comment.created_at.strftime('%A') %>
+          <% day = comment.created_at.strftime('%A') %>
+           <%= comment.created_at.strftime('%a, %b %d, %Y') %>
+        <% end %>
+      </td>
+      <td style="font-size: medium; white-space: nowrap;">
+        <%= comment.created_at.strftime('%-I:%M %p') %>
+      </td>
+      <td class="comment" style="max-width: 500px;"><%= simple_format(comment.comment) %></td>
+      <td class="comment_actions" style="white-space: nowrap;">
+        <%= link_to 'Show', comment %> |
+        <%= link_to 'Edit', edit_comment_path(comment) %> |
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
     </tr>
   <% end %>
 </table>

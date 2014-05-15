@@ -25,7 +25,11 @@ class CommentsController < ApplicationController
       @comment = Comment.new(comment_params)
     end
     if @comment.save
-      redirect_to @commentable, notice: "Comment created."
+      if params[:return]
+        redirect_to params[:return], notice: "Comment created."
+      else
+        redirect_to @commentable, notice: "Comment created."
+      end
     else
       render :new
     end
@@ -59,6 +63,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:comment, :commentable_type, :commentable_id)
+      params.require(:comment).permit(:comment, :commentable_type, :commentable_id, :return)
     end
 end
