@@ -3,14 +3,11 @@
   ul { padding: 1em 1em 1em 1em; margin: 0; list-style-type:none; }
   li { line-height: 2em; font-size: medium; }
   h2 { display: inline-block; margin-right: 1em; }
-  th { padding: .5em }
+  th { padding: .5em; font-size: medium; }
 </style>
 
 <h1>Listing schedules</h1>
 
-<% @scheduled_event = ScheduledEvent.new %>
-<p><%= link_to 'Schedule new event', '#', :id=>"scheduled_event_form_revealer", :class=>'fake_link' %></p>
-<div id="scheduled_event_form" style="display: none;"><%= render :partial=>'scheduled_events/form' %></div>
 
 <% @schedules.each do |schedule| %>
 
@@ -20,13 +17,14 @@
   <%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %>
 <table style="margin-left: auto; margin-right: auto;">
   <thead>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-    <th>Sunday</th>
+    <% day = Date.today.strftime('%A') %>
+    <th style="<%= 'color: #DD6600;' if day == 'Monday' %>">Monday</th>
+    <th style="<%= 'color: teal;' if day == 'Tuesday' %>">Tuesday</th>
+    <th style="<%= 'color: #DD6600;' if day == 'Wednesday' %>">Wednesday</th>
+    <th style="<%= 'color: #DD6600;' if day == 'Thursday' %>">Thursday</th>
+    <th style="<%= 'color: #DD6600;' if day == 'Friday' %>">Friday</th>
+    <th style="<%= 'color: #DD6600;' if day == 'Saturday' %>">Saturday</th>
+    <th style="<%= 'color: #DD6600;' if day == 'Sunday' %>">Sunday</th>
   </thead>
   <tbody>
     <tr>
@@ -87,4 +85,7 @@
 
 <br>
 
-<%= link_to 'New Schedule', new_schedule_path %>
+<%= link_to 'New Schedule', new_schedule_path %> |
+<%= link_to 'New Scheduled Event', '#', :id=>"scheduled_event_form_revealer", :class=>'fake_link' %>
+<% @scheduled_event = ScheduledEvent.new %>
+<div id="scheduled_event_form_container" style="display: none;"><%= render :partial=>'scheduled_events/form' %></div>

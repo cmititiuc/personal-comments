@@ -8,11 +8,13 @@
 </head>
 <body>
 
-<%= link_to_if controller_name != 'comments', 'Comments', comments_path %> |
-<%= link_to_if controller_name != 'schedules',  'Schedules', schedules_path %> |
-<%= link_to_if controller_name != 'meals',  'Meals', meals_path %> |
-<%= link_to_if controller_name != 'events',  'Events', events_path %> |
-<%= link_to_if controller_name != 'scheduled_events',  'Scheduled Events', scheduled_events_path %>
+<div id="nav_links_container">
+  <%= link_to 'Comments', comments_path, :style=>"#{'font-weight: bold; font-size: medium; text-decoration: none;' if controller_name == 'comments'}" %> |
+  <%= link_to 'Schedules', schedules_path, :style=>"#{'font-weight: bold; font-size: medium; text-decoration: none;' if controller_name == 'schedules'}" %> |
+  <%= link_to 'Meals', meals_path, :style=>"#{'font-weight: bold; font-size: medium; text-decoration: none;' if controller_name == 'meals'}" %> |
+  <%= link_to 'Events', events_path, :style=>"#{'font-weight: bold; font-size: medium; text-decoration: none;' if controller_name == 'events'}" %> |
+  <%= link_to 'Scheduled Events', scheduled_events_path, :style=>"#{'font-weight: bold; font-size: medium; text-decoration: none;' if controller_name == 'scheduled_events'}" %>
+</div>
 
 <%= yield %>
 
