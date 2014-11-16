@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @comments = Comment.all
+    @comments = current_user.comments
     @comments = @comments.where('commentable_id = ?', params[:filter]) if params[:filter]
   end
 
@@ -17,13 +17,13 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id]) rescue nil
-    if @commentable
-      @comment = @commentable.comments.new(comment_params)
-    else
+    # @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id]) rescue nil
+    # if @commentable
+    #   @comment = @commentable.comments.new(comment_params)
+    # else
       @commentable = comments_path
-      @comment = Comment.new(comment_params)
-    end
+      @comment = current_user.comments.build(comment_params)
+    # end
     if @comment.save
       if params[:return]
         redirect_to params[:return], notice: "Comment created."
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comment = current_user.comments.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
