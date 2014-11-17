@@ -24,7 +24,7 @@
   <% day = nil %>
   <% @comments.each do |comment| %>
     <% commentable = comment.commentable_type.constantize.find(comment.commentable_id) rescue nil %>
-    <tr>
+    <tr class="comment_container">
       <td style="white-space: nowrap; font-size: medium; width: 1px;">
         <% unless day == comment.created_at.strftime('%A') %>
           <% day = comment.created_at.strftime('%A') %>
