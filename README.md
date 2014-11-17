@@ -66,6 +66,7 @@ rvm use 2.1.5 (not sure if I had to do this)
 changed database.yml production path to outside source tree so it doesn't get replaced on deploy
 
 <h4>/etc/nginx/nginx.conf</h4>
+````
 user www-data;
 worker_processes 4;
 pid /run/nginx.pid;
@@ -162,9 +163,10 @@ http {
 #   proxy      on;
 # }
 # }
+````
 
 <h4>/etc/nginx/sites-enabled/default</h4>
-
+````
 # You may add here your
 # server {
 # ...
@@ -281,3 +283,4 @@ server {
 #   try_files $uri $uri/ =404;
 # }
 # }
+````
