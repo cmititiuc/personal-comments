@@ -59,8 +59,6 @@ sudo apt-get install nodejs
 
 mina deploy
 
-fix nginx file
-
 rvm use 2.1.5 (not sure if I had to do this)
 
 changed database.yml production path to outside source tree so it doesn't get replaced on deploy
