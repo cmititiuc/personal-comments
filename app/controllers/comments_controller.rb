@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :get_comment]
 
   def index
+    @comment = Comment.new
     @comments = current_user.comments
     @comments = @comments.where('commentable_id = ?', params[:filter]) if params[:filter]
   end
@@ -14,6 +15,10 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -24,25 +29,28 @@ class CommentsController < ApplicationController
       @commentable = comments_path
       @comment = current_user.comments.build(comment_params)
     # end
-    if @comment.save
-      if params[:return]
-        redirect_to params[:return], notice: "Comment created."
+ 
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to params[:return] ? params[:return] : @commentable, notice: "Comment created." }
+        format.js { render :create, :locals=>{ notice: 'Comment created.' } }
       else
-        redirect_to @commentable, notice: "Comment created."
+        format.html { render :new }
+        format.js
       end
-    else
-      render :new
     end
   end
 
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to params[:return_path] ? params[:return_path] : @comment, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
+        format.js { render :update, :locals=>{ notice: 'Comment was successfully updated.' } }
       else
         format.html { render :edit }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -50,9 +58,14 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to params[:return_path] ? params[:return_path] : comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render :plain=>'Comment was successfully destroyed.' }
     end
+  end
+
+  def get_comment # maybe rename this 'get_form'?
+    render :partial=>'comments/form', :locals=>{ :height=>params[:height], :return_path=>params[:return_path] }
   end
 
   private

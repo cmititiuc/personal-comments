@@ -1,0 +1,16 @@
+<tr>
+  <td style="white-space: nowrap; font-size: medium;">
+    <%= comment.created_at.strftime('%a, %b %d, %Y') %>
+  </td>
+  <td style="font-size: medium; white-space: nowrap;">
+    <%= comment.created_at.strftime('%-I:%M %p') %>
+  </td>
+  <td class="commentable_link"><%= link_to comment.commentable.name, comment.commentable if comment.commentable %></td>
+  <td class="comment" id="comment_<%= comment.id %>" data-id="<%= comment.id %>"><%= simple_format(comment.comment) %></td>
+  <td class="comment_actions" style="white-space: nowrap;">
+    <%= link_to 'Show', comment %> |
+    <%= link_to 'Edit', edit_comment_path(comment), :remote=>true, :class=>'edit' %> |
+    <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true, :class=>'destroy' %>
+  </td>
+</tr>
+

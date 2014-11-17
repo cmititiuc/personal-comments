@@ -1,5 +1,9 @@
 <style>
-  td { padding: .5em; vertical-align: top; }
+  td { padding: 1em; vertical-align: top; }
+  td.commentable_link a { font-size: medium; }
+  td.comment { line-height: 1.5em; }
+  td.comment_actions a { font-size: x-small; }
+  td p { padding-top: 0; margin-top: 0; }
 </style>
 <p id="notice"><%= notice %></p>
 
@@ -14,7 +18,7 @@
   <% end %>
 </div>
 
-<table>
+<table style="margin-left: auto; margin-right: auto;">
   <% @event.comments.all.each do |comment| %>
     <tr>
       <% day = nil %>
@@ -31,7 +35,7 @@
       <td class="comment_actions" style="white-space: nowrap;">
         <%= link_to 'Show', comment %> |
         <%= link_to 'Edit', edit_comment_path(comment) %> |
-        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Destroy', comment_path(comment, :return_path=>event_path(@event)), method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>

@@ -1,0 +1,4 @@
+original_text[<%= @comment.id %>] = $('#comment_<%= @comment.id %>').html();
+var cancel_markup = '<div class="cancel"><a href="#">Cancel</a></div>';
+$('#comment_<%= @comment.id %>').html('<%= escape_javascript(render :partial=>'comments/form') %>').prepend(cancel_markup).removeClass('comment');
+$('#comment_<%= @comment.id %> .edit_comment #comment_comment').height($('#comment_<%= @comment.id %>').next().children('.edit').attr('data-height'));
