@@ -15,7 +15,7 @@
 
 <div style="text-align: center;">
   <%= link_to 'clear filter', comments_path if params[:filter] %>
-  <% Event.order(:name).each do |event| %>
+  <% current_user.events.order(:name).each do |event| %>
     <%= link_to event.name, comments_path(:filter=>event.id) %>
   <% end %>
 </div>

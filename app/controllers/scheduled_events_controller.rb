@@ -4,7 +4,7 @@ class ScheduledEventsController < ApplicationController
   # GET /scheduled_events
   # GET /scheduled_events.json
   def index
-    @scheduled_events = ScheduledEvent.all
+    @scheduled_events = current_user.scheduled_events.all
   end
 
   # GET /scheduled_events/1
@@ -24,7 +24,7 @@ class ScheduledEventsController < ApplicationController
   # POST /scheduled_events
   # POST /scheduled_events.json
   def create
-    @scheduled_event = ScheduledEvent.new(scheduled_event_params)
+    @scheduled_event = current_user.scheduled_events.build(scheduled_event_params)
 
     respond_to do |format|
       if @scheduled_event.save
@@ -64,7 +64,7 @@ class ScheduledEventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_scheduled_event
-      @scheduled_event = ScheduledEvent.find(params[:id])
+      @scheduled_event = current_user.scheduled_events.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

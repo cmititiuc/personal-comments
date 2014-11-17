@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :schedule %><br>
-    <%= f.select :schedule_id, Schedule.all.map{ |s| [s.name, s.id] } %>
+    <%= f.select :schedule_id, current_user.schedules.map{ |s| [s.name, s.id] } %>
   </div>
   <div class="field">
     <%= f.label :event %><br>
-    <%= f.select :event_id, Event.all.map{ |e| [e.name, e.id] } %>
+    <%= f.select :event_id, current_user.events.map{ |e| [e.name, e.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = current_user.schedules
   end
 
   # GET /schedules/1
@@ -24,7 +24,7 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    @schedule = Schedule.new(schedule_params)
+    @schedule = current_user.schedules.build(schedule_params)
 
     respond_to do |format|
       if @schedule.save
@@ -64,7 +64,7 @@ class SchedulesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule
-      @schedule = Schedule.find(params[:id])
+      @schedule = current_user.schedules.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

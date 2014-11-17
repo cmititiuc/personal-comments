@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.select :commentable_id,
-                 [['-- None --', '']] + Event.order(:name).map{ |e| [e.name, e.id] },
+                 [['-- None --', '']] + current_user.events.order(:name).map{ |e| [e.name, e.id] },
                  (@comment.new_record? ? { :selected=>params[:filter] } : {}) %>
     <%= f.hidden_field :commentable_type, :value=>'Event' %>
     <%= hidden_field_tag :return_path, return_path if local_assigns[:return_path] %>

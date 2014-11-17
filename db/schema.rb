@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116015510) do
+ActiveRecord::Schema.define(version: 20141117041009) do
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -32,14 +32,20 @@ ActiveRecord::Schema.define(version: 20141116015510) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "meals", force: true do |t|
     t.string   "period"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "meals", ["user_id"], name: "index_meals_on_user_id"
 
   create_table "scheduled_events", force: true do |t|
     t.string   "day"
@@ -47,13 +53,19 @@ ActiveRecord::Schema.define(version: 20141116015510) do
     t.datetime "updated_at"
     t.integer  "schedule_id"
     t.integer  "event_id"
+    t.integer  "user_id"
   end
+
+  add_index "scheduled_events", ["user_id"], name: "index_scheduled_events_on_user_id"
 
   create_table "schedules", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "schedules", ["user_id"], name: "index_schedules_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
