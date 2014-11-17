@@ -1,5 +1,7 @@
 *Really simple* weekly schedule and meal plan app.
 
+ophect.me
+
 <h4>Deploy Steps (Digital Ocean)</h4>
 
 generate ssh key
