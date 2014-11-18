@@ -4,7 +4,13 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = current_user.comments
-    @comments = @comments.where('commentable_id = ?', params[:filter]) if params[:filter]
+    if params[:filter]
+      if params[:filter] == 'nil'
+        @comments = @comments.where('commentable_id IS NULL')
+      else
+        @comments = @comments.where('commentable_id = ?', params[:filter]) if params[:filter]
+      end
+    end
   end
 
   def show
@@ -24,7 +30,7 @@ class CommentsController < ApplicationController
   def create
     # @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id]) rescue nil
     # if @commentable
-    #   @comment = @commentable.comments.new(comment_params)
+      # @comment = current_user.comments.build(comment_params, :commentable_type=>@commentable)
     # else
       @commentable = comments_path
       @comment = current_user.comments.build(comment_params)
