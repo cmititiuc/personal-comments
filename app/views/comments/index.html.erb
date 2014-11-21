@@ -22,16 +22,27 @@
       <td style="font-size: medium; white-space: nowrap; width: 1px;">
         <%= comment.created_at.strftime('%-I:%M %p') %>
       </td>
-      <td class="commentable_link" style="width: 1px"><%= link_to commentable.name, commentable if commentable %></td>
-      <td class="comment" id="comment_<%= comment.id %>" data-id="<%= comment.id %>"><%= simple_format(comment.comment) %></td>
+      <td class="commentable_link" style="width: 1px">
+        <%= link_to commentable.name, commentable if commentable %>
+      </td>
+      <td class="comment" id="comment_<%= comment.id %>" data-id="<%= comment.id %>">
+        <%= simple_format(comment.comment) %>
+      </td>
       <td class="comment_actions" style="white-space: nowrap; width: 1px;">
         <%= link_to 'Show', comment %> |
         <%= link_to 'Edit', edit_comment_path(comment), :remote=>true, :class=>'edit' %> |
-        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true, :class=>'destroy' %>
+        <%= link_to 'Destroy',
+                    comment,
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    :remote=>true, :class=>'destroy'
+        %>
       </td>
     </tr>
   <% end %>
 </table>
 <% if @comments.blank? %>
-  <div style="text-align: center; padding: 1em; line-height: 1.5em; font-size: medium;">No comments.</div>
+  <div style="text-align: center; padding: 1em; line-height: 1.5em; font-size: medium;">
+    No comments.
+  </div>
 <% end %>
