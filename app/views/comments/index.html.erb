@@ -8,19 +8,6 @@
   <%= render :partial=>'comments/form' %>
 </div>
 
-<%#= link_to 'remote ajax link',
-             get_comment_comments_path(:id=>@comment.id, :return_path=>comments_path),
-             :remote=>true,
-             :id=>'remote_ajax_comment' %>
-
-<div style="text-align: center;">
-  <%= link_to 'clear filter', comments_path if params[:filter] %>
-  <%= link_to 'none', comments_path(:filter=>'nil') %>
-  <% current_user.events.order(:name).each do |event| %>
-    <%= link_to event.name, comments_path(:filter=>event.id) %>
-  <% end %>
-</div>
-
 <table id="list" style="width: 100%">
   <% day = nil %>
   <% @comments.each do |comment| %>
@@ -48,7 +35,3 @@
 <% if @comments.blank? %>
   <div style="text-align: center; padding: 1em; line-height: 1.5em; font-size: medium;">No comments.</div>
 <% end %>
-
-<br>
-
-<%= link_to 'New Comment', new_comment_path %>
